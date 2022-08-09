@@ -1,0 +1,21 @@
+<div fxLayout="row">
+    <button mat-mini-fab color="primary" >
+        <mat-icon>note_add</mat-icon>
+      </button>
+    <div fxLayout="row wrap" fxLayoutGap="1rem grid">
+        <app-edit-memo *ngIf="addingMemo"></app-edit-memo>
+        <app-memo *ngFor = "let memo of memos" [memo]="memo"></app-memo>
+
+    </div>   
+</div>
+
+<!-- ngFor is creating a series of the memos,
+initializes memo
+ <app-memo *ngFor = "let butterfly of memos" [memo]="butterfly"></app-memo>
+<app-memo *ngFor = "let memo of memos" [lizard]="memo"></app-memo>
+ in ts file should be 
+ [memo] pushed  - parent
+ "memo" pushed - child
+ 
+
+-->

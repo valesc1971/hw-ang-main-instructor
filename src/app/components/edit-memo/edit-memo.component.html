@@ -1,0 +1,26 @@
+<mat-card class="memo-card">
+    <mat-card-subtitle>{{ memo.createdOn | date: 'shortDate' }}</mat-card-subtitle>  <!-- date: how it needs to be formatted-->
+    <mat-card-content>
+          
+            <mat-form-field class="full-width" appearance="standard">
+              <!-- ngModel - read and write
+                changes in textarea to be applied to new text
+                ngModel directive: takes thise changes, listen for the event and send that value to our varibale
+            -->
+              <textarea matInput placeholder="Memo text" rows ="1" [(ngModel)]="newText" >
+                {{memo.text}}
+                <!-- memo.text is the default value for the textarea-->
+              </textarea>
+            </mat-form-field>
+          
+        </mat-card-content>
+    <mat-card-actions class="actions" align="end">
+      <button mat-icon-button class="'icon" (click)="onApply()">
+        <mat-icon [inline]="true">
+            check
+        </mat-icon></button>
+      <button mat-icon-button class="icon"><mat-icon [inline]="true" (click)="onCancel()">
+        cancel</mat-icon></button>
+    </mat-card-actions>
+
+  </mat-card>

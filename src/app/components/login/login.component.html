@@ -1,0 +1,20 @@
+<div class="centerhv">
+    <form (ngSubmit)="onSubmit($event)">
+        <div layout="row">
+            <mat-form-field appearance="standard">
+                <input matInput placeholder="Username">
+            </mat-form-field>
+        </div>
+        <div layout="row">
+            <mat-form-field appearance="standard">
+                <input matInput placeholder="Password" type="password">
+            </mat-form-field>
+        </div>
+        <div layout="row">
+            <button class="block" type="submit" [disabled]="pending" mat-flat-button color="primary">Login</button>
+        </div>
+        <div layout="row">
+            <a class="block" mat-button href="">Register</a>
+        </div>
+    </form>
+</div>

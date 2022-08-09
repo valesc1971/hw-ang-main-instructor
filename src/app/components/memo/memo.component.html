@@ -1,0 +1,11 @@
+<mat-card class="memo-card">
+    <mat-card-subtitle>{{ memo.createdOn | date: 'shortDate' }}</mat-card-subtitle>  <!-- date: how it needs to be formatted-->
+    <mat-card-content>{{memo.text}}</mat-card-content>
+    <mat-card-actions class="actions" align="end">
+      <button mat-icon-button class="'icon"><mat-icon [inline]="true" (click)="onEdit()">
+        edit</mat-icon></button>
+      <button mat-icon-button class="icon"><mat-icon [inline]="true" (click)="onDelete()">
+        delete</mat-icon></button>
+    </mat-card-actions>
+
+  </mat-card>
