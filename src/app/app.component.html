@@ -4,4 +4,5 @@
 <app-edit-memo ></app-edit-memo>
 --> 
 
-<app-memos ></app-memos>
+<app-login *ngIf = "username ===undefined"></app-login>
+<app-memos *ngIf = "username !==undefined"></app-memos>

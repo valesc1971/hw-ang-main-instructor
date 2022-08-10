@@ -2,12 +2,12 @@
     <form (ngSubmit)="onSubmit($event)">
         <div layout="row">
             <mat-form-field appearance="standard">
-                <input matInput placeholder="Username">
+                <input matInput placeholder="Username" name="username" [(ngModel)]="username">
             </mat-form-field>
         </div>
         <div layout="row">
             <mat-form-field appearance="standard">
-                <input matInput placeholder="Password" type="password">
+                <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="password">
             </mat-form-field>
         </div>
         <div layout="row">

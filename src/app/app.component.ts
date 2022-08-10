@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UIService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'hw-ang';
+  username: string | undefined
+
+  constructor(private uiService: UIService){
+    uiService.whenUsernameChanges().subscribe(
+      username => this.username = username)
+    
+  }
+
 }

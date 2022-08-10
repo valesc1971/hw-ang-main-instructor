@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UIService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-login', // how we reference this component in html
@@ -11,14 +12,18 @@ export class LoginComponent implements OnInit {
   password: string = ''
   pending: boolean = false
 
-  constructor() { }
+  constructor(private uiService:UIService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(event: {preventDefault: () => void}): void {
     event.preventDefault()
-    console.log('submit!!')
+    console.log('submit!')
+    this.uiService.attemptLogin({
+      username: this.username,
+      password: this.password
+    })
   }
 
 }
