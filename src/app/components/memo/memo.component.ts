@@ -12,8 +12,8 @@ export class MemoComponent implements OnInit {
   // memo still needs to be initialized b/c the constructor will need a value before the html provides the value
   @Input() memo: Memo = {createdOn: new Date, text: 'default text here'} // memos needs to deal with just 1 memo, not with an array of memo
   
-  
-  constructor(private uiService: UIService) { }
+  // best practice to keep it private same as keeping const instead of vars
+  constructor(private uiService: UIService) { }  
 
   ngOnInit(): void {
   }

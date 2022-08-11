@@ -17,7 +17,8 @@ export class EditMemoComponent implements OnInit {
   
   newText: string =''   // init to the same as input ''
 
-  constructor(private uiService: UIService) { }
+  constructor(private uiService: UIService)  // access to the uiservice
+   { }
 
   // just before this is calles, this.memo has been loaded with the correct value
   // from the html when loaded
@@ -48,6 +49,7 @@ export class EditMemoComponent implements OnInit {
 
   onCancel(): void{
     this.cancel.emit()
+    //this.uiService.cancelAddMemo()
 
 
 }

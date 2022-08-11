@@ -1,4 +1,4 @@
-<div fxLayout="row">
+<div fxLayout="row" fxLayoutGap="1rem" class="space">
     <button mat-mini-fab color="primary" (click)="onAddMemoClicked()" >
         <mat-icon>note_add</mat-icon>
       </button>
@@ -12,7 +12,13 @@
     </div>   
 </div>
 
-<!-- ngFor is creating a series of the memos,
+
+
+<!-- 
+    memos is the parent of memo and edit-memo
+    
+    
+    ngFor is creating a series of the memos,
 initializes memo
  <app-memo *ngFor = "let butterfly of memos" [memo]="butterfly"></app-memo>
 <app-memo *ngFor = "let memo of memos" [lizard]="memo"></app-memo>

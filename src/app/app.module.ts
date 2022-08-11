@@ -8,12 +8,14 @@ import {MatCardModule} from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { MemoComponent } from './components/memo/memo.component';
 import { EditMemoComponent } from './components/edit-memo/edit-memo.component';
 import { MemosComponent } from './components/memos/memos.component';
+import { HeaderComponent } from './components/header/header.component';
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import { MemosComponent } from './components/memos/memos.component';
     LoginComponent,
     MemoComponent,
     EditMemoComponent,
-    MemosComponent
+    MemosComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,8 @@ import { MemosComponent } from './components/memos/memos.component';
     MatInputModule,
     MatCardModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    MatToolbarModule
 
   ],
   providers: [],

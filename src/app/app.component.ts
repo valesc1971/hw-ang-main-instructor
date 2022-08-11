@@ -10,6 +10,7 @@ export class AppComponent {
   username: string | undefined
 
   constructor(private uiService: UIService){
+
     uiService.whenUsernameChanges().subscribe(
       username => this.username = username)
     
