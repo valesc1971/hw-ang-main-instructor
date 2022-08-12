@@ -28,6 +28,11 @@ export class UIService {
 
   username: string | undefined = ''  // 6. make a user name to be used in dummyUserNameUpdate
 
+/*
+isLogginIn: boolean: true
+
+*/
+
 constructor(private usersService: UsersService) { }
 // actions that happen to the app
 
@@ -140,15 +145,24 @@ attemptLogin(credentials: {username: string, password: string}): void {
     if (maybeAUser !== undefined) {
       this.username = credentials.username
       this.userSubject.next(this.username)
-    } else
-      console.log('login failed')
+    } else 
+    alert('username/password does not exit, need to register')
+  
+    console.log('login failed')
   })
 }
 
+//4. registration: ui.service receives the info -----attempRegistration --- send the info to usersService --- postUserReg and subscribe to the observer username/password
 
 
 attemptRegistration(credentials: {username: string, password: string}) {  
-  this.usersService.post(credentials.username, credentials.password).subscribe()
+  this.usersService.postUserReg(credentials.username, credentials.password).subscribe(maybeAUser => {
+    if (maybeAUser !== undefined) {
+      this.username = credentials.username
+      this.userSubject.next(this.username)
+    } else
+    console.log('registration failed')
+  })
 
 
 }

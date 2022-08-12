@@ -8,6 +8,7 @@ import {MatCardModule} from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -19,6 +20,10 @@ import { MemosComponent } from './components/memos/memos.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 
+const appRoutes: Routes = [
+{path: '', component: LoginComponent},
+{path: 'registration', component: RegistrationComponent}
+]
 
 @NgModule({
   declarations: [
@@ -41,7 +46,8 @@ import { RegistrationComponent } from './components/registration/registration.co
     MatIconModule,
     FormsModule,
     MatToolbarModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes)
 
   ],
   providers: [],

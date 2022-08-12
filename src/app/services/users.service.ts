@@ -25,7 +25,7 @@ constructor(private http: HttpClient) { }
     return this.http.get<User[]>(`http://localhost:5000/users?username=${username}&password=${password}`) // returns an observable of an array of User objects
       .pipe(map(users => { // map all events from a User[] to a User | undefined 
         //transforms an observable
-        // pipe takes multiple functions                             
+        // pipe takes in data as input and transform to the desidered output                          
         if (users.length === 0)
           return undefined
         
@@ -33,14 +33,26 @@ constructor(private http: HttpClient) { }
       }))
   }
 
-  
 
 // post request on user/password to fill out the dabatabase
 
-post(username:string,password:string):Observable<any>{
+//registration 5. postUserReg passes the username/password as observable and posts this user/password to the json server
+
+postUserReg(username:string,password:string):Observable<any>{
   return this.http.post(this.apiUrl,{username,password})
 }
 
+/*
+add(username: string, password: string): Observable<undefined> {
+const user: User = {
+  username: username,
+  password: password
+}
+
+  this.http.post('http://localhost:5000/Users', user )
+}
+
+*/
 }
 
 

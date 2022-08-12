@@ -1,5 +1,5 @@
-<div class="centerhv">
 
+<div class="centerhv">
     <form (ngSubmit)="onSubmit($event)">
         <div layout="row">
             <mat-form-field appearance="standard">
@@ -14,9 +14,9 @@
         <div layout="row">
             <button class="block" type="submit" [disabled]="pending" mat-flat-button color="primary">Login</button>
         </div>
-        <!-- <div layout="row">
-            <a class="block" mat-button href="">Register</a>
-        </div> -->
+        <div layout="row">
+            <a class="block" mat-button  routerLink="/registration"> go to register</a>
+        </div>
     </form>
 
 </div>
