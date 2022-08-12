@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import {Memo} from 'src/app/Memo'
+import {Memo} from 'src/app/Memo';
+import { UsersService } from './users.service';
+import { User } from '../User';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +28,7 @@ export class UIService {
 
   username: string | undefined = ''  // 6. make a user name to be used in dummyUserNameUpdate
 
-constructor() { }
+constructor(private usersService: UsersService) { }
 // actions that happen to the app
 
 dummyMemosUpdate() {
@@ -133,12 +135,30 @@ applyTheEdit(id: number, text: string) {
 }
 
 attemptLogin(credentials: {username: string, password: string}): void {  
-  if (credentials.username === 'mad' && credentials.password === 'pass'){ // check if hardcoded values / authentication of credentials
-    this.username = credentials.username   // 7. need to get the username from the login
-    this.userSubject.next(credentials.username)} // 8. update userSubject and pushes the value (next -- method that takes the message and passing into the observable (in this case, credential.username))
-  else
-    console.log('login failed')
+  this.usersService.get(credentials.username, credentials.password)
+  .subscribe(maybeAUser => {
+    if (maybeAUser !== undefined) {
+      this.username = credentials.username
+      this.userSubject.next(this.username)
+    } else
+      console.log('login failed')
+  })
 }
+
+
+
+attemptRegistration(credentials: {username: string, password: string}) {  
+  this.usersService.post(credentials.username, credentials.password).subscribe()
+
+
+}
+
+//   if (credentials.username === 'mad' && credentials.password === 'pass'){ // check if hardcoded values / authentication of credentials
+//     this.username = credentials.username   // 7. need to get the username from the login
+//     this.userSubject.next(credentials.username)} // 8. update userSubject and pushes the value (next -- method that takes the message and passing into the observable (in this case, credential.username))
+//   else
+//     console.log('login failed')
+// }
 
 
 

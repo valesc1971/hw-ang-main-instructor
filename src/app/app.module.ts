@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -16,6 +17,7 @@ import { MemoComponent } from './components/memo/memo.component';
 import { EditMemoComponent } from './components/edit-memo/edit-memo.component';
 import { MemosComponent } from './components/memos/memos.component';
 import { HeaderComponent } from './components/header/header.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import { HeaderComponent } from './components/header/header.component';
     MemoComponent,
     EditMemoComponent,
     MemosComponent,
-    HeaderComponent
+    HeaderComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,8 @@ import { HeaderComponent } from './components/header/header.component';
     MatCardModule,
     MatIconModule,
     FormsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    HttpClientModule
 
   ],
   providers: [],

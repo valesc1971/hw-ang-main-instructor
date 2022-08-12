@@ -1,6 +1,5 @@
 <div class="centerhv">
-
-    <form (ngSubmit)="onSubmit($event)">
+    <form (ngSubmit)="onUserReg()">
         <div layout="row">
             <mat-form-field appearance="standard">
                 <input matInput placeholder="Username" name="username" [(ngModel)]="username">
@@ -11,13 +10,12 @@
                 <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="password">
             </mat-form-field>
         </div>
-        <div layout="row">
-            <button class="block" type="submit" [disabled]="pending" mat-flat-button color="primary">Login</button>
-        </div>
-        <!-- <div layout="row">
-            <a class="block" mat-button href="">Register</a>
-        </div> -->
-    </form>
 
+        <div layout="row">
+            <button class="block" type="submit" mat-flat-button color="primary">Registration</button>
+        </div>
+    </form>
 </div>
 
+
+<!-- [(ngModel)]  2 ways data binding between the property (username, password) and the input []:inputs  (): events are output--> 
