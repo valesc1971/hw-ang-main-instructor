@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import {Memo} from 'src/app/Memo';
+import { MemosService } from './memos.service';
 import { UsersService } from './users.service';
 import { User } from '../User';
 
@@ -15,25 +16,18 @@ export class UIService {
   
   memosSubject: Subject<Memo[]> = new Subject() // allows to observe changes to the memo[]
   private nextID: number = 0
-  memos: Memo[] = [
-    {id: ++this.nextID, createdOn: new Date, text: 'same in service 1'},
-    {id: ++this.nextID, createdOn: new Date, text: 'same in service 2'},
-    {id: ++this.nextID, createdOn: new Date, text: 'same in service 3'},
-    {id: ++this.nextID, createdOn: new Date, text: 'same in service 4'},
-    {id: ++this.nextID, createdOn: new Date, text: 'same in service 5'},
-  ]
+  memos: Memo[] = []
 
   editSubject: Subject<number | undefined> = new Subject()
   userSubject: Subject<string | undefined> = new Subject()
 
   username: string | undefined = ''  // 6. make a user name to be used in dummyUserNameUpdate
 
-/*
-isLogginIn: boolean: true
+  userID: number | undefined
+  isLoggingIn: boolean = true
+  isLoggingInSubject: Subject<boolean> = new Subject()
 
-*/
-
-constructor(private usersService: UsersService) { }
+constructor(private usersService: UsersService, private memosService: MemosService) { }
 // actions that happen to the app
 
 dummyMemosUpdate() {
@@ -49,6 +43,8 @@ whenMemosListUpdated(): Observable<Memo[]> {
   return this.memosSubject.asObservable()
 }
 
+
+// actions that happen to the application
 //starting the process of adding the memo
 startAddMemo(): void{
   
@@ -84,14 +80,18 @@ applyCreateMemoHappened(text: string): void{  // text needs to be provided
 // modify the state, push the new memo into the list
 
 const newMemo: Memo = {
-  id: ++this.nextID,
-  createdOn: new Date(),  
+  userID: this.userID,
+  createdOn: new Date(),
   text
 }
 
-  this.memos.push(newMemo)  // push into memos list
-  this.memosSubject.next(this.memos) // notify who needs to be notified
+this.memosService.add(newMemo).subscribe(() => {
+  this.refreshMemos()
   this.showCreateMemoSubject.next(false)
+})
+  // this.memos.push(newMemo)  // push into memos list
+  // this.memosSubject.next(this.memos) // notify who needs to be notified
+  // this.showCreateMemoSubject.next(false)
 
 }
 
@@ -139,33 +139,51 @@ applyTheEdit(id: number, text: string) {
 
 }
 
+private refreshMemos(): void {
+  if (this.userID !== undefined)
+    this.memosService.getByUserID(this.userID)
+      .subscribe(memos => {
+        this.memos = memos
+        this.memosSubject.next(memos)
+      })
+  else
+    console.log('Backend returned a user w/o an id')
+}
+
+
 attemptLogin(credentials: {username: string, password: string}): void {  
   this.usersService.get(credentials.username, credentials.password)
   .subscribe(maybeAUser => {
     if (maybeAUser !== undefined) {
       this.username = credentials.username
+      this.userID = maybeAUser.id
       this.userSubject.next(this.username)
+      this.refreshMemos()
     } else 
-    alert('username/password does not exit, need to register')
-  
+ 
     console.log('login failed')
   })
 }
 
 //4. registration: ui.service receives the info -----attempRegistration --- send the info to usersService --- postUserReg and subscribe to the observer username/password
 
-
-attemptRegistration(credentials: {username: string, password: string}) {  
-  this.usersService.postUserReg(credentials.username, credentials.password).subscribe(maybeAUser => {
-    if (maybeAUser !== undefined) {
-      this.username = credentials.username
-      this.userSubject.next(this.username)
-    } else
-    console.log('registration failed')
+attemptRegister(credentials: { username: string; password: string; }) {
+  this.usersService.add(credentials).subscribe(() => {
+    this.attemptLogin(credentials)
   })
-
-
 }
+
+// attemptRegistration(credentials: {username: string, password: string}) {  
+//   this.usersService.postUserReg(credentials.username, credentials.password).subscribe(maybeAUser => {
+//     if (maybeAUser !== undefined) {
+//       this.username = credentials.username
+//       this.userSubject.next(this.username)
+//     } else
+//     console.log('registration failed')
+//   })
+
+
+
 
 //   if (credentials.username === 'mad' && credentials.password === 'pass'){ // check if hardcoded values / authentication of credentials
 //     this.username = credentials.username   // 7. need to get the username from the login
@@ -185,6 +203,22 @@ whenUsernameChanges(): Observable<string | undefined>{
   return this.userSubject.asObservable()
 
 }
+
+
+whenIsLogginInChanges(): Observable<boolean> {
+  return this.isLoggingInSubject.asObservable()
+}
+
+showRegisterPage(): void {
+  this.isLoggingIn = false
+  this.isLoggingInSubject.next(this.isLoggingIn)
+}
+
+showLoginPage(): void {
+  this.isLoggingIn = true
+  this.isLoggingInSubject.next(this.isLoggingIn)
+}
+
 }
 
 

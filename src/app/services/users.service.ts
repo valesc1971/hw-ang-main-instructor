@@ -38,21 +38,17 @@ constructor(private http: HttpClient) { }
 
 //registration 5. postUserReg passes the username/password as observable and posts this user/password to the json server
 
-postUserReg(username:string,password:string):Observable<any>{
-  return this.http.post(this.apiUrl,{username,password})
+// postUserReg(username:string,password:string):Observable<any>{
+//   return this.http.post(this.apiUrl,{username,password})
+// }
+
+// implementinh registering w/ the json server backend
+add(user: User): Observable<undefined> {
+
+  return this.http.post<undefined>('http://localhost:5000/Users', user )
 }
 
-/*
-add(username: string, password: string): Observable<undefined> {
-const user: User = {
-  username: username,
-  password: password
-}
 
-  this.http.post('http://localhost:5000/Users', user )
-}
-
-*/
 }
 
 

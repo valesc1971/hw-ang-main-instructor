@@ -34,8 +34,8 @@ export class RegistrationComponent implements OnInit {
     }
     console.log(userReg)
 
-    this.uiService.attemptRegistration({username: this.username,  // 3. attempRegistration passing the username/password
-      password: this.password})
+    // this.uiService.attemptRegistration({username: this.username,  // 3. attempRegistration passing the username/password
+    //   password: this.password})
 
        // clear the form
     this.username = ''

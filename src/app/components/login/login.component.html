@@ -12,10 +12,11 @@
             </mat-form-field>
         </div>
         <div layout="row">
-            <button class="block" type="submit" [disabled]="pending" mat-flat-button color="primary">Login</button>
+            <button class="block" type="submit" [disabled]="pending"
+                mat-flat-button color="primary">{{ submitText }}</button>
         </div>
         <div layout="row">
-            <a class="block" mat-button  routerLink="/registration"> go to register</a>
+            <a class="block" mat-button href="" (click)="onLink($event)">{{ linkText }}</a>
         </div>
     </form>
 
